@@ -2,9 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function About() {
-   
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const socialLinks = [
     {
@@ -53,9 +51,9 @@ function About() {
           </p>
 
           <p className="mt-4 text-base leading-8 text-gray-700 sm:text-lg sm:leading-9">
-            I believe the best way to learn development is to build real
-            things, solve problems, and understand why the code works — not
-            just make it work.
+            I believe the best way to learn development is to build real things,
+            solve problems, and understand why the code works — not just make it
+            work.
           </p>
         </div>
 
@@ -117,8 +115,8 @@ function About() {
 
             <a
               href="mailto:YOUR_EMAIL@example.com?subject=Project%20Inquiry"
-              onClick={()=>{
-                navigate('/contactform')
+              onClick={() => {
+                navigate("/contactform");
               }}
               className="inline-flex w-fit shrink-0 items-center gap-3 border-2 border-black bg-[#D9F36A] px-4 py-3 text-sm font-black transition-all duration-200 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#111111]"
             >

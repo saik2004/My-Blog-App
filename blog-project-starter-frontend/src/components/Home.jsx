@@ -469,7 +469,6 @@ function Home() {
               You can know better about me by reading my blogs here. I share my
               expertise here.
             </p>
-            
             {readblog?<button
               className="group mt-7 inline-flex items-center border-2 border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all duration-200 hover:-translate-y-1 hover:bg-[#F5F5F0] hover:text-black hover:shadow-[5px_5px_0px_#111111] sm:mt-8 sm:px-7"
               onClick={() => navigate("/blogs")}
@@ -487,7 +486,6 @@ function Home() {
                 →
               </span>
             </button>}
-            
           </div>
         </div>
       </section>
