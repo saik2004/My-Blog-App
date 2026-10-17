@@ -27,7 +27,7 @@ function Navbar() {
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [navigate]);
 
   function handlelogout() {
     signOut(auth);
