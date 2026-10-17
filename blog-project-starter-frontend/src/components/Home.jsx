@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 
 import DB from "../assets/data-server.png";
+import ecommerprjdrax from "../assets/ecommerprjdrax.png";
+import portfolioprj from "../assets/portfolioprj.png";
+import actodoprj from "../assets/actodoprj.png";
 import REACTICON from "../assets/physics.png";
 import NODE from "../assets/node-js.png";
 import BlogImage from "../assets/blogImage.png";
@@ -51,42 +54,45 @@ const technologies = [
 const projects = [
   {
     id: 1,
-    title: "Project One",
-    description: "Add your project description here.",
-    image: null,
-    technologies: ["React", "Tailwind CSS"],
-    liveLink: "",
+    title: "E-Commerce Draxx",
+    description:
+      "An e-commerce website with promotional sections, side navigation, product galleries, and JavaScript-based interactions.",
+    image: ecommerprjdrax,
+    technologies: ["HTML", "Tailwind CSS", "JavaScript"],
+    liveLink: "https://saik2004.github.io/E-commerce-Draxx/",
   },
   {
     id: 2,
-    title: "Project Two",
-    description: "Add your project description here.",
-    image: null,
-    technologies: ["Node.js", "Express", "MongoDB"],
-    liveLink: "",
+    title: "Actodo",
+    description:
+      "A React todo app with signup and login flow. New users can create an account, get redirected to login, and access their todo list using their registered credentials.",
+    image: actodoprj,
+    technologies: ["React", "JavaScript", "Tailwind CSS"],
+    liveLink: "https://actodo-react-app-mu.vercel.app/",
   },
   {
     id: 3,
-    title: "Project Three",
-    description: "Add your project description here.",
-    image: null,
-    technologies: ["React", "Firebase"],
-    liveLink: "",
+    title: "Personal Showcase",
+    description:
+      "A bold, modern digital experience engineered with React and Tailwind CSS, crafted to transform a developer's personal brand into an interactive showcase of technical expertise, innovative projects, and creative problem-solving. Featuring a distinctive visual identity, responsive design, and a seamless user experience, this portfolio brings skills, projects, and professional aspirations together in one polished digital space — where code meets creativity and first impressions become opportunities.",
+    image: portfolioprj,
+    technologies: ["React", "Tailwind CSS"],
+    liveLink: "https://portfolio-seven-alpha-20.vercel.app/",
   },
 ];
 
 function Home() {
   const navigate = useNavigate();
-  const [readblog,setreadblog] = useState(false)
+  const [readblog, setreadblog] = useState(false);
 
   useEffect(() => {
     try {
       auth.onAuthStateChanged(function (user) {
         if (user) {
           console.log("logged in");
-          setreadblog(true)
+          setreadblog(true);
         } else {
-          setreadblog(false)
+          setreadblog(false);
           console.log("logged out");
         }
       });
@@ -140,7 +146,12 @@ function Home() {
             </a>
 
             <div className="mt-6 flex flex-wrap items-center gap-4 sm:mt-8">
-              <button className="group inline-flex items-center border-2 border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all duration-200 hover:-translate-y-1 hover:bg-[#F5F5F0] hover:text-black hover:shadow-[5px_5px_0px_#111111] sm:px-7">
+              <button
+                onClick={() => {
+                  navigate("/contactform");
+                }}
+                className="group inline-flex items-center border-2 border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all duration-200 hover:-translate-y-1 hover:bg-[#F5F5F0] hover:text-black hover:shadow-[5px_5px_0px_#111111] sm:px-7"
+              >
                 Hire Me
               </button>
 
@@ -244,12 +255,16 @@ function Home() {
                 modern frontend and backend technologies.
               </p>
 
-              <button className="group mt-7 inline-flex items-center border-2 border-black px-6 py-4 text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:bg-black hover:text-white sm:mt-8 sm:px-7">
+              <a
+                href="/saikumarresume.pdf"
+                download="ResumeFromSai.pdf"
+                className="group mt-7 inline-flex items-center border-2 border-black px-6 py-4 text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:bg-black hover:text-white sm:mt-8 sm:px-7"
+              >
                 Download CV
                 <span className="ml-3 inline-block transition-transform duration-200 group-hover:translate-y-1">
                   ↓
                 </span>
-              </button>
+              </a>
             </div>
 
             {/* SERVICE CARDS */}
@@ -312,7 +327,7 @@ function Home() {
               </p>
 
               <h2 className="text-3xl font-black leading-tight tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-                Checkout My Live
+                Checkout My FEW Live
                 <br />
                 <span className="text-gray-400">Projects Here.</span>
               </h2>
@@ -398,12 +413,10 @@ function Home() {
                         href={project.liveLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between gap-3 text-xs font-black uppercase tracking-wider transition-colors hover:text-gray-500 sm:text-sm"
+                        className="group flex w-full items-center justify-between border-2 border-black bg-[#D9F36A] px-4 py-3 text-xs font-black uppercase tracking-wider text-black transition-all duration-200 hover:bg-black hover:text-[#D9F36A] hover:shadow-[4px_4px_0px_0px_#8BAA24] active:translate-x-1 active:translate-y-1 active:shadow-none sm:text-sm"
                       >
-                        <span>View Live Project</span>
-
-                        <span className="text-xl transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1">
-                          ↗
+                        <span className="transition-transform duration-200 group-hover:translate-x-1">
+                          View Live Project
                         </span>
                       </a>
                     ) : (
@@ -469,23 +482,27 @@ function Home() {
               You can know better about me by reading my blogs here. I share my
               expertise here.
             </p>
-            {readblog?<button
-              className="group mt-7 inline-flex items-center border-2 border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all duration-200 hover:-translate-y-1 hover:bg-[#F5F5F0] hover:text-black hover:shadow-[5px_5px_0px_#111111] sm:mt-8 sm:px-7"
-              onClick={() => navigate("/blogs")}
-            >
-              Read My Blogs
-              <span className="ml-3 inline-block transition-transform duration-200 group-hover:translate-x-1">
-                →
-              </span>
-            </button>:<button
-              className="group mt-7 inline-flex items-center border-2 border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all duration-200 hover:-translate-y-1 hover:bg-[#F5F5F0] hover:text-black hover:shadow-[5px_5px_0px_#111111] sm:mt-8 sm:px-7"
-              onClick={() => navigate("/login")}
-            >
-               Login to Read My Blogs
-              <span className="ml-3 inline-block transition-transform duration-200 group-hover:translate-x-1">
-                →
-              </span>
-            </button>}
+            {readblog ? (
+              <button
+                className="group mt-7 inline-flex items-center border-2 border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all duration-200 hover:-translate-y-1 hover:bg-[#F5F5F0] hover:text-black hover:shadow-[5px_5px_0px_#111111] sm:mt-8 sm:px-7"
+                onClick={() => navigate("/blogs")}
+              >
+                Read My Blogs
+                <span className="ml-3 inline-block transition-transform duration-200 group-hover:translate-x-1">
+                  →
+                </span>
+              </button>
+            ) : (
+              <button
+                className="group mt-7 inline-flex items-center border-2 border-black bg-black px-6 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all duration-200 hover:-translate-y-1 hover:bg-[#F5F5F0] hover:text-black hover:shadow-[5px_5px_0px_#111111] sm:mt-8 sm:px-7"
+                onClick={() => navigate("/login")}
+              >
+                Login to Read My Blogs
+                <span className="ml-3 inline-block transition-transform duration-200 group-hover:translate-x-1">
+                  →
+                </span>
+              </button>
+            )}
           </div>
         </div>
       </section>

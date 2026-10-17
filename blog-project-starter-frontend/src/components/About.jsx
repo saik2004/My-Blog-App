@@ -12,12 +12,12 @@ function About() {
     },
     {
       name: "Instagram",
-      href: "YOUR_INSTAGRAM_URL",
+      href: "https://www.instagram.com/dev.sai_/",
       icon: "↗",
     },
     {
       name: "LinkedIn",
-      href: "YOUR_LINKEDIN_URL",
+      href: "https://www.linkedin.com/in/2004saikumar/",
       icon: "in",
     },
     {
@@ -46,7 +46,7 @@ function About() {
           <p className="text-base leading-8 text-gray-700 sm:text-lg sm:leading-9">
             I'm <span className="font-black text-black">Sai Kumar</span>, an
             aspiring full-stack developer who enjoys turning ideas into
-            functional web applications. I build with React, JavaScript,
+            functional web applications. I build applications with React, JavaScript,
             Node.js, Express, and MongoDB, while continuously improving my
             skills through hands-on projects.
           </p>

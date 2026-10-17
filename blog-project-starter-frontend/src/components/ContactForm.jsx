@@ -1,4 +1,5 @@
-import React from "react";
+
+import Footer from "./common/Footer";
 
 function ContactForm() {
   const WEB3_FORM_ACCESSKEY = process.env.REACT_APP_WEB3FORMS_ACCESS_KEY;
@@ -7,6 +8,7 @@ function ContactForm() {
     "mt-2 w-full min-w-0 border-2 border-black bg-white px-3 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:bg-[#F9FCEB] focus:ring-2 focus:ring-[#D9F36A] sm:px-4 sm:py-3.5 sm:text-base";
 
   return (
+    <>
     <main className="min-h-screen w-full overflow-x-hidden bg-white px-4 py-10 text-[#111111] sm:px-6 sm:py-14 lg:px-8 lg:py-20">
       <section className="mx-auto w-full max-w-3xl">
         {/* Heading */}
@@ -161,6 +163,8 @@ function ContactForm() {
         </div>
       </section>
     </main>
+    <Footer/>
+    </>
   );
 }
 

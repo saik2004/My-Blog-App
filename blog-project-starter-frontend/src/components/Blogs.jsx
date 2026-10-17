@@ -8,6 +8,7 @@ const ADMIN_ID = process.env.REACT_APP_ADMIN_ID;
 const API_URL = process.env.REACT_APP_API_URL;
 
 function Blogs() {
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -18,7 +19,10 @@ function Blogs() {
         setBlogs(res.data);
       })
       .catch((error) => {
-        console.log("Error fetching blogs:", error);
+        console.error("Error fetching blogs:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
 
     // Check Firebase authentication and admin status
@@ -277,7 +281,43 @@ function Blogs() {
         )}
 
         {/* Blog Cards */}
-        {blogs.length > 0 ? (
+
+        {isLoading ? (
+          /* Cute Loading State */
+          <div
+            className="flex min-h-[320px] flex-col items-center justify-center border-2 border-dashed border-gray-300 px-4 py-12 text-center sm:min-h-[380px]"
+            role="status"
+            aria-live="polite"
+          >
+            {/* Animated Loading Symbol */}
+            <div className="relative mb-6 flex h-16 w-16 items-center justify-center">
+              <div className="absolute inset-0 animate-spin rounded-full border-4 border-gray-200 border-t-[#8BAA24]" />
+
+              <span className="animate-pulse text-2xl" aria-hidden="true">
+                ✳
+              </span>
+            </div>
+
+            <h3 className="mb-2 text-xl font-black sm:text-2xl">
+              Gathering little ideas...
+            </h3>
+
+            <p className="max-w-sm text-sm leading-7 text-gray-500">
+              Your stories are on their way. Just a tiny moment while we get
+              everything ready for you. ♡
+            </p>
+
+            {/* Animated Loading Dots */}
+            <div className="mt-5 flex items-center gap-2" aria-hidden="true">
+              <span className="h-2 w-2 animate-bounce rounded-full bg-[#8BAA24]" />
+              <span className="h-2 w-2 animate-bounce rounded-full bg-[#8BAA24] [animation-delay:150ms]" />
+              <span className="h-2 w-2 animate-bounce rounded-full bg-[#8BAA24] [animation-delay:300ms]" />
+            </div>
+
+            <span className="sr-only">Loading blog articles, please wait.</span>
+          </div>
+        ) : blogs.length > 0 ? (
+          /* Blog Cards */
           <div className="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-7">
             {blogs
               .slice()
@@ -311,7 +351,7 @@ function Blogs() {
                       {blog.date}
                     </p>
 
-                    {/* Divider */}
+                    {/* Animated Divider */}
                     <div className="mb-4 h-[2px] w-12 bg-[#D9F36A] transition-all duration-300 group-hover:w-20 sm:mb-5" />
 
                     {/* Article Content */}
@@ -355,10 +395,8 @@ function Blogs() {
                       </div>
 
                       {/* Admin Delete Action */}
-                      {/* Admin Delete Action */}
                       {isAdmin && (
                         <div className="mt-3">
-                          {/* Delete Button */}
                           <div className="flex justify-start">
                             <button
                               type="button"
@@ -393,7 +431,6 @@ function Blogs() {
                               </p>
 
                               <div className="mt-3 flex flex-wrap gap-2">
-                                {/* Cancel */}
                                 <button
                                   type="button"
                                   onClick={() => setConfirmDeleteId(null)}
@@ -402,7 +439,6 @@ function Blogs() {
                                   Cancel
                                 </button>
 
-                                {/* Confirm Delete */}
                                 <button
                                   type="button"
                                   onClick={() => handleDeleteBlog(blog._id)}
@@ -431,7 +467,7 @@ function Blogs() {
               })}
           </div>
         ) : (
-          /* Empty State */
+          /* Empty State — Shown Only After Loading Completes */
           <div className="border-2 border-dashed border-gray-300 px-4 py-12 text-center sm:px-5 sm:py-20">
             <div
               className="mb-4 text-4xl sm:mb-5 sm:text-5xl"
