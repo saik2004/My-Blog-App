@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Navbar from "./common/Navbar";
+
 import { useEffect } from "react";
-import BlogProfileImage from "../assets/Blog Website Design.jpg";
+
 import DB from "../assets/data-server.png";
 import REACTICON from "../assets/physics.png";
 import NODE from "../assets/node-js.png";

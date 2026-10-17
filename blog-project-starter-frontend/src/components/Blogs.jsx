@@ -5,12 +5,13 @@ import Footer from "./common/Footer";
 import auth from "../config/firebase";
 
 const ADMIN_ID = process.env.REACT_APP_ADMIN_ID;
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Blogs() {
   useEffect(() => {
     window.scrollTo(0, 0);
     axios
-      .get("http://localhost:5000/api/blogs")
+      .get(`${API_URL}/api/blogs`)
       .then((res) => {
         // console.log(res.data);
         setBlogs(res.data);
@@ -49,7 +50,7 @@ function Blogs() {
       const token = await auth.currentUser.getIdToken();
 
       const response = await axios.patch(
-        `http://localhost:5000/api/blogs/like/${blog_id}`,
+        `${API_URL}/api/blogs/like/${blog_id}`,
         {},
         {
           headers: {
@@ -60,7 +61,7 @@ function Blogs() {
       // After successfully updating the likes count in the backend, fetch the updated list of blogs
       if (response.status === 200) {
         axios
-          .get("http://localhost:5000/api/blogs")
+          .get(`${API_URL}/api/blogs`)
           .then((res) => {
             // console.log(res.data);
             setBlogs(res.data);
@@ -87,7 +88,7 @@ function Blogs() {
     const likes = 0;
     axios
       .post(
-        "http://localhost:5000/api/blogs",
+        `${API_URL}/api/blogs`,
         {
           newTitle,
           date,
@@ -104,7 +105,7 @@ function Blogs() {
         // console.log(res.data);
 
         axios
-          .get("http://localhost:5000/api/blogs")
+          .get(`${API_URL}/api/blogs`)
           .then((res) => {
             // console.log(res.data);
             setBlogs(res.data);
@@ -127,14 +128,11 @@ function Blogs() {
     try {
       const token = await auth.currentUser.getIdToken();
 
-      const response = await axios.delete(
-        `http://localhost:5000/api/blogs/${blogId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const response = await axios.delete(`${API_URL}/api/blogs/${blogId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      });
 
       if (response.status === 200 && response.data.success) {
         setBlogs((prevBlogs) =>
