@@ -10,23 +10,28 @@ const API_URL = process.env.REACT_APP_API_URL;
 function Blogs() {
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // Fetch blogs
     axios
       .get(`${API_URL}/api/blogs`)
       .then((res) => {
-        // console.log(res.data);
         setBlogs(res.data);
       })
-      .catch(() => {
-        console.log("Error fetching data");
+      .catch((error) => {
+        console.log("Error fetching blogs:", error);
       });
 
-    auth.onAuthStateChanged(function (user) {
-      if (user.uid === ADMIN_ID) {
+    // Check Firebase authentication and admin status
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user && user.uid === ADMIN_ID) {
         setadmin(true);
       } else {
         setadmin(false);
       }
     });
+
+    // Clean up the Firebase listener
+    return () => unsubscribe();
   }, []);
 
   const [newTitle, setNewTitle] = useState("");

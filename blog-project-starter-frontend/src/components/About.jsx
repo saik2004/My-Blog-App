@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import Footer from "./common/Footer";
 function About() {
   const navigate = useNavigate();
 
@@ -28,6 +28,7 @@ function About() {
   ];
 
   return (
+    <>
     <main className="min-h-screen w-full overflow-x-hidden bg-white text-[#111111]">
       <section className="mx-auto w-full max-w-7xl px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-24">
         {/* Section Label */}
@@ -126,6 +127,8 @@ function About() {
         </div>
       </section>
     </main>
+    <Footer/>
+    </>
   );
 }
 

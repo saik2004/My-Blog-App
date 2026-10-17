@@ -11,28 +11,30 @@ function Navbar() {
   const [isblog, setblog] = useState(true);
 
   useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log("logged in");
+        setlogout(true);
+        setblog(true);
+      } else {
+        console.log("logged out");
+        setlogout(false);
+        setblog(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  async function handlelogout() {
     try {
-      auth.onAuthStateChanged(function (user) {
-        if (user) {
-          console.log("logged in");
-          setlogout(true);
-          setblog(true);
-        } else {
-          setlogout(false);
-          setblog(false);
-          navigate("/home");
-          console.log("logged out");
-        }
-      });
-    } catch (err) {
-      console.log(err);
+      await signOut(auth);
+      navigate("/home");
+      console.log("Logged out successfully");
+    } catch (error) {
+      console.error("Logout failed:", error);
     }
-  }, [navigate]);
-
-  function handlelogout() {
-    signOut(auth);
   }
-
   return (
     <header className="w-full bg-white px-1.5 pt-1.5 sm:px-4 sm:pt-4">
       <nav className="mx-auto flex w-full max-w-7xl flex-col gap-2  bg-white p-2 sm:gap-4 sm:p-4 md:flex-row md:items-center md:justify-between md:gap-5 md:px-6 md:py-4">
