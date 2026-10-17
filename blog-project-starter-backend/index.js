@@ -114,14 +114,7 @@ const Blog = mongoose.model("Blog", blogSchema, "Blog");
 
 // ========================================
 // MongoDB Connection
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log("Connection Successfull");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+
 // ========================================
 
 // Reuse the connection instead of opening a new one
@@ -131,27 +124,39 @@ let mongoConnectionPromise = null;
 
 const ensureMongoConnection = async (req, res, next) => {
   try {
-    if (mongoose.connection.readyState !== 1) {
-      if (!mongoConnectionPromise) {
-        mongoConnectionPromise = mongoose
-          .connect(process.env.MONGODB_URI)
-          .then(() => {
-            console.log("MongoDB connected successfully");
-            console.log("Database:", mongoose.connection.name);
-            console.log("Blog collection:", Blog.collection.name);
-          })
-          .catch((error) => {
-            mongoConnectionPromise = null;
-            throw error;
-          });
-      }
-
-      await mongoConnectionPromise;
+    // Reuse an existing connection.
+    if (mongoose.connection.readyState === 1) {
+      return next();
     }
 
-    next();
+    // Reuse an in-progress connection attempt.
+    if (!mongoConnectionPromise) {
+      mongoConnectionPromise = mongoose
+        .connect(process.env.MONGODB_URI, {
+          serverSelectionTimeoutMS: 10000,
+        })
+        .then(() => {
+          console.log("MongoDB connected successfully");
+          console.log("Database:", mongoose.connection.name);
+          console.log("Blog collection:", Blog.collection.name);
+
+          return mongoose.connection;
+        })
+        .catch((error) => {
+          // Allow a future request to retry the connection.
+          mongoConnectionPromise = null;
+
+          console.error("MongoDB connection failed:", error.message);
+
+          throw error;
+        });
+    }
+
+    await mongoConnectionPromise;
+
+    return next();
   } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
+    console.error("Database connection error:", error);
 
     return res.status(503).json({
       success: false,
@@ -159,6 +164,9 @@ const ensureMongoConnection = async (req, res, next) => {
     });
   }
 };
+
+// All blog routes require database connectivity.
+app.use(ensureMongoConnection);
 
 // All blog routes require database connectivity.
 app.use(ensureMongoConnection);
