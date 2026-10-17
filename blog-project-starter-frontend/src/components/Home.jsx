@@ -435,7 +435,7 @@ function Home() {
                 src={BlogImage}
                 loading="lazy"
                 className="aspect-[4/3] w-full object-cover sm:aspect-[3/4]"
-                alt="Blog Profile Image"
+                alt="Blog Profile"
               />
 
               <div className="mt-3 flex items-center justify-between gap-2 border-t-2 border-black pt-4">
