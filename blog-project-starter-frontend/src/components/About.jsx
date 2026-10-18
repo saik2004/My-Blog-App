@@ -114,7 +114,7 @@ function About() {
               </p>
             </div>
 
-            <a
+            <button
               
               onClick={() => {
                 navigate("/contactform");
@@ -122,7 +122,7 @@ function About() {
               className="inline-flex w-fit shrink-0 items-center gap-3 border-2 border-black bg-[#D9F36A] px-4 py-3 text-sm font-black transition-all duration-200 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#111111]"
             >
               Hire Me <span>↗</span>
-            </a>
+            </button>
           </div>
         </div>
       </section>
