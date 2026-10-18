@@ -83,7 +83,7 @@ function Signup() {
   };
 
   return (
-    <div className="relative flex min-h-screen w-full items-center justify-center bg-[#F5F5F0] px-4 py-8 text-[#111111] sm:px-6 sm:py-12">
+    <div className="relative isolate flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#F5F5F0] px-4 py-8 text-[#111111] sm:px-6 sm:py-12">
       {/* DECORATIVE SHAPES */}
       <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 border-[24px] border-[#D9F36A] opacity-60 sm:h-72 sm:w-72" />
 

@@ -115,7 +115,7 @@ function About() {
             </div>
 
             <a
-              href="mailto:YOUR_EMAIL@example.com?subject=Project%20Inquiry"
+              
               onClick={() => {
                 navigate("/contactform");
               }}
