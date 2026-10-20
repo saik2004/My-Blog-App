@@ -60,11 +60,11 @@ function Footer() {
         {/* BOTTOM SECTION */}
         <div className="flex flex-col gap-3 text-xs text-gray-500 sm:flex-row sm:items-center sm:justify-between sm:text-sm">
           <p>
-            © {new Date().getFullYear()} Personal. All rights reserved.
+            © {new Date().getFullYear()} Personal. Build By Sai🖤.
           </p>
 
           <p className="font-semibold uppercase tracking-widest">
-            Designed with purpose.
+            Designed with purpose by Sai
           </p>
         </div>
       </div>
